@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>お問い合わせ | 森のキノコ研究会（仮）</title>
+    <meta
+      name="description"
+      content="森のキノコ研究会（仮）へのお問い合わせ・参加相談用のページ（デモ）。実際のフォームに置き換える際の項目例も記載しています。"
+    />
+    <style>
+      :root {
+        --bg: #f8fafc;
+        --bg-soft: #f1f5f9;
+        --accent: #22c55e;
+        --accent-soft: rgba(34, 197, 94, 0.12);
+        --accent-strong: #16a34a;
+        --text: #1e293b;
+        --muted: #64748b;
+        --border-soft: rgba(148, 163, 184, 0.25);
+        --shadow-soft: 0 18px 40px rgba(0, 0, 0, 0.08);
+        --radius-lg: 18px;
+        --radius-pill: 999px;
+        --transition-fast: 180ms ease-out;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          sans-serif;
+        color: var(--text);
+        background:
+          radial-gradient(circle at top, #e0f2fe 0, #f0f9ff 55%, #ffffff 100%),
+          radial-gradient(circle at bottom, #f0fdf4 0, #ffffff 60%);
+      }
+
+      .noise-overlay {
+        pointer-events: none;
+        position: fixed;
+        inset: 0;
+        opacity: 0.04;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 1600 900' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.2' numOctaves='3' stitchTiles='noStitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.36'/%3E%3C/svg%3E");
+        mix-blend-mode: multiply;
+        z-index: -1;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      main {
+        max-width: 1120px;
+        margin: 0 auto;
+        padding: 22px 18px 64px;
+      }
+
+      header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 40px;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .logo-circle {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: radial-gradient(circle at 30% 20%, #bbf7d0, #22c55e 36%, #14532d 80%);
+        position: relative;
+        box-shadow: 0 0 0 1px rgba(34, 197, 94, 0.3),
+          0 18px 30px rgba(34, 197, 94, 0.15);
+        overflow: hidden;
+      }
+
+      .logo-circle::before,
+      .logo-circle::after {
+        content: "";
+        position: absolute;
+        border-radius: 50%;
+        background: #f9fafb;
+      }
+
+      .logo-circle::before {
+        width: 18px;
+        height: 18px;
+        bottom: 5px;
+        left: 11px;
+        box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.8);
+      }
+
+      .logo-circle::after {
+        width: 28px;
+        height: 14px;
+        bottom: 2px;
+        left: 6px;
+        border-radius: 999px 999px 8px 8px;
+        background: radial-gradient(circle at 50% 0%, #facc15, #f97316 55%, #b45309 90%);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      }
+
+      .brand-text-title {
+        font-size: 18px;
+        font-weight: 600;
+        letter-spacing: 0.06em;
+      }
+
+      .brand-text-sub {
+        font-size: 12px;
+        color: var(--muted);
+      }
+
+      nav {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 13px;
+        color: var(--muted);
+      }
+
+      nav a {
+        padding: 6px 10px;
+        border-radius: 999px;
+        border: 1px solid transparent;
+        transition: all var(--transition-fast);
+      }
+
+      nav a:hover {
+        color: var(--text);
+        border-color: rgba(148, 163, 184, 0.4);
+        background: rgba(241, 245, 249, 0.8);
+      }
+
+      .section-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.6fr);
+        gap: 22px;
+        align-items: flex-start;
+      }
+
+      section {
+        margin-bottom: 26px;
+      }
+
+      .section-title {
+        font-size: 14px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 10px;
+      }
+
+      .section-sub {
+        font-size: 16px;
+        margin-bottom: 10px;
+        font-weight: 600;
+      }
+
+      .section-lead {
+        font-size: 13px;
+        color: var(--muted);
+        line-height: 1.7;
+      }
+
+      .card {
+        border-radius: 20px;
+        padding: 16px 18px 14px;
+        background: radial-gradient(circle at top left, #ffffff, #f8fafc);
+        border: 1px solid rgba(148, 163, 184, 0.25);
+        box-shadow: var(--shadow-soft);
+      }
+
+      .contact-card {
+        display: grid;
+        grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.6fr);
+        gap: 14px;
+        align-items: center;
+      }
+
+      .contact-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        font-size: 13px;
+        color: var(--muted);
+      }
+
+      .contact-list li {
+        margin-bottom: 8px;
+      }
+
+      .contact-list strong {
+        color: var(--text);
+        font-weight: 500;
+      }
+
+      .contact-hint {
+        font-size: 11px;
+        color: var(--muted);
+        margin-top: 8px;
+      }
+
+      .contact-box {
+        border-radius: 16px;
+        padding: 10px 12px;
+        background: rgba(241, 245, 249, 0.8);
+        border: 1px solid rgba(148, 163, 184, 0.25);
+        font-size: 12px;
+        color: var(--muted);
+        line-height: 1.6;
+      }
+
+      .contact-field-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-top: 6px;
+      }
+
+      .contact-pill {
+        font-size: 11px;
+        padding: 4px 8px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.9);
+        border: 1px dashed rgba(148, 163, 184, 0.35);
+        color: var(--muted);
+      }
+
+      footer {
+        margin-top: 26px;
+        padding-top: 12px;
+        border-top: 1px solid rgba(148, 163, 184, 0.2);
+        font-size: 11px;
+        color: var(--muted);
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+
+      .footer-mini {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .footer-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 999px;
+        background: #22c55e;
+        box-shadow: 0 0 0 1px rgba(21, 128, 61, 0.5);
+      }
+
+      @media (max-width: 880px) {
+        header {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        nav {
+          align-self: stretch;
+          justify-content: flex-start;
+          flex-wrap: wrap;
+        }
+
+        .section-grid,
+        .contact-card {
+          grid-template-columns: minmax(0, 1fr);
+        }
+      }
+
+      @media (max-width: 640px) {
+        main {
+          padding-inline: 14px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="noise-overlay" aria-hidden="true"></div>
+    <main>
+      <header>
+        <div class="brand">
+          <div class="logo-circle" aria-hidden="true"></div>
+          <div>
+            <div class="brand-text-title">森のキノコ研究会（仮）</div>
+            <div class="brand-text-sub">Citizen Mycology Lab / since 2025</div>
+          </div>
+        </div>
+        <nav aria-label="サイト内ナビゲーション">
+          <a href="index.html">トップ</a>
+          <a href="activity.html">活動内容</a>
+          <a href="achievement.html">実績</a>
+          <a href="report.html">成果の報告</a>
+          <a href="message.html">代表からの挨拶</a>
+          <a href="contact.html">お問い合わせ</a>
+        </nav>
+      </header>
+
+      <section aria-labelledby="contact-heading">
+        <div class="section-grid">
+          <div>
+            <div class="section-title">Contact</div>
+            <h1 id="contact-heading" class="section-sub">お問い合わせ</h1>
+            <p class="section-lead">
+              このサイトはデモ用の仮サイトですので、記載の連絡先や開催情報は実在しません。<br />
+              実際の運用時には、メールフォームやSNSアカウントなど、団体に合った連絡方法を設定してください。
+            </p>
+          </div>
+          <div class="card contact-card">
+            <div>
+              <ul class="contact-list">
+                <li><strong>参加対象：</strong> キノコ・菌類に興味のある方ならどなたでも</li>
+                <li><strong>活動頻度：</strong> 月2回程度（フィールド＋オンライン）</li>
+                <li><strong>参加費：</strong> 現地までの交通費＋保険料など実費（想定）</li>
+              </ul>
+              <p class="contact-hint">
+                ※ 実際に団体を立ち上げる場合は、安全管理・保険・活動規約なども合わせてご検討ください。
+              </p>
+            </div>
+            <div class="contact-box">
+              <div>▼ 連絡フォームに入れたい項目の例</div>
+              <div class="contact-field-row">
+                <span class="contact-pill">お名前（ニックネーム可）</span>
+                <span class="contact-pill">メールアドレス</span>
+                <span class="contact-pill">キノコ歴・興味のあること</span>
+                <span class="contact-pill">参加してみたい活動内容</span>
+              </div>
+              <div class="contact-hint">
+                Webフォームを実装する場合は、このボックス部分を実際の入力フォームに置き換えてください。
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer>
+        <div class="footer-mini">
+          <div class="footer-dot" aria-hidden="true"></div>
+          <span>このページは「キノコの研究団体の紹介サイト」の仮デザインです。</span>
+        </div>
+        <div>Design mock &copy; 2025 Mori no Kinoko Lab (virtual)</div>
+      </footer>
+    </main>
+  </body>
+</html>
+
+
